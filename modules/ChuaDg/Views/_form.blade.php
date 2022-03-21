@@ -26,7 +26,7 @@
                 </div>
                 <div class="row form-group">
                     <div class="col-md-2">
-                       <label for="chuakd" class="title">Chưa kiểm điểm</label>
+                        <label for="chuakd" class="title">Chưa kiểm điểm</label>
                     </div>
                     <div class="col-md-4">
                         <input type="checkbox" class="checkbox-custom" id="chuakd" name="chuakd"
@@ -64,6 +64,21 @@
 @push('js')
     {!! JsValidator::formRequest('Modules\ChuaDg\Requests\ChuaDgRequest') !!}
     <script !src="">
+
+        $(document).on('change', '#nam', function () {
+            var nam = $(this).val();
+            $.ajax({
+                url: "{{route('get.chuadg.getDangvien','')}}/" + nam,
+                type: 'get'
+            }).done(function (response) {
+                let dangvien = Object.values(response)
+                dangvien.unshift('Chọn đảng viên')
+                $('#madv').empty().select2({
+                    data: dangvien
+                })
+            })
+
+        })
 
         var datetime = $('input.datetime-modal-form');
         datetime.attr('autocomplete', "off");
