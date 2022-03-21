@@ -1,5 +1,10 @@
 Document Root Source
 
+I. Khi chay demo
+Run this command:
+
+    php artisan serve
+
 II. Set .env file
     Clone .env.example to .env and set database info.
     
