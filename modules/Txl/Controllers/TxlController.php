@@ -35,8 +35,9 @@ class TxlController extends Controller {
         $dangvien = DangVien::query()->where('user_id', Auth::id())->first();
         $data     = Dgdv::query()->where('madv', $dangvien->madv);
         $data     = $data->orderBy('nam')->paginate(20);
+        $toyear   = Carbon::now()->year;
 
-        return view("Txl::index", compact('data'));
+        return view("Txl::index", compact('data', 'toyear'));
     }
 
     /**
@@ -45,8 +46,8 @@ class TxlController extends Controller {
      */
     public function getCreate(Request $request) {
         $xeploai = Rating::all()->pluck('tenxeploai', 'maxeploai')->toArray();
-        $nam     = Nam::all()->pluck('nam', 'nam')->toArray();
         $toyear  = Carbon::now()->year;
+        $nam     = Nam::query()->where('nam','>=',$toyear)->pluck('nam', 'nam')->toArray();
         if (!$request->ajax()) {
             return redirect()->back();
         }
@@ -63,10 +64,12 @@ class TxlController extends Controller {
         $dangvien = DangVien::query()->where('user_id', Auth::user()->id)->first();
         $txl      = Dgdv::query()->where('nam', $data['nam'])->where('madv', $dangvien->madv)->first();
         if ($txl != null) {
-            $txl->update([
-                'txl' => $data['txl']
-            ]);
-            $request->session()->flash('success', trans('Cập nhật thành công'));
+            $request->session()->flash('danger', trans('Năm này đã đánh giá rồi'));
+            return back();
+            //            $txl->update([
+            //                'txl' => $data['txl']
+            //            ]);
+            //            $request->session()->flash('success', trans('Cập nhật thành công'));
         } else {
             Dgdv::create([
                 'madv' => $dangvien->madv,
@@ -81,14 +84,15 @@ class TxlController extends Controller {
 
     /**
      * @param Request $request
-     * @param $id
-     * @return Factory|View
+     * @param $madv
+     * @param $nam
+     * @return \Illuminate\Contracts\Foundation\Application|Factory|View
      */
     public function getUpdate(Request $request, $madv, $nam) {
         $data    = Dgdv::query()->where('nam', $nam)->where('madv', $madv)->first();
         $xeploai = Rating::all()->pluck('tenxeploai', 'maxeploai')->toArray();
-        $nam     = Nam::all()->pluck('nam', 'nam')->toArray();
         $toyear  = Carbon::now()->year;
+        $nam     = Nam::query()->where('nam','>=',$toyear)->pluck('nam', 'nam')->toArray();
         return view('Txl::form', compact('data', 'xeploai', 'nam', 'toyear'));
     }
 
@@ -121,6 +125,12 @@ class TxlController extends Controller {
         return back();
     }
 
+    /**
+     * @param Request $request
+     * @param $madv
+     * @param $nam
+     * @return RedirectResponse
+     */
     public function delete(Request $request, $madv, $nam) {
         $txl = Dgdv::query()->where('nam', $nam)->where('madv', $madv)->first();
 

@@ -1,7 +1,7 @@
 <?php
 return [
     'name'         => 'dgdv',
-    'display_name' => 'Đánh giá đảng viên',
+    'display_name' => 'Đánh Giá Đảng Viên',
     'group'        => [
         [
             'name'         => 'dgdv-create',

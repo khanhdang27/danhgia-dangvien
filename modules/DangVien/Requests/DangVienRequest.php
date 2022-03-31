@@ -28,7 +28,6 @@ class DangVienRequest extends FormRequest {
             default:
                 return [
                     'macb'          => 'required',
-                    'madv'          => 'required|digits:4|unique:dangviens,madv',
                     'mavc'          => 'required|digits:6|unique:dangviens,mavc',
                     'hoten'         => 'required',
                     'ngaysinh'      => 'required',
@@ -46,7 +45,6 @@ class DangVienRequest extends FormRequest {
             case 'update':
                 return [
                     'macb'          => 'required',
-                    'madv'          => 'required|digits:4|unique:dangviens,madv,' . $this->id . ',madv',
                     'mavc'          => 'required|digits:6|unique:dangviens,mavc,' . $this->id . ',madv',
                     'hoten'         => 'required',
                     'ngaysinh'      => 'required',

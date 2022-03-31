@@ -19,7 +19,7 @@
                         <label for="madv">Đảng viên</label>
                     </div>
                     <div class="col-md-4">
-                        {!! Form::select('madv', $prompt + $dangvien, $data->madv ?? NULL, [
+                        {!! Form::select('madv', $prompt + $dangvien, $data->madv ?? old('madv'), [
                        'id' => 'madv',
                        'class' => 'select2 form-control',]) !!}
                     </div>
@@ -71,8 +71,8 @@
                 url: "{{route('get.chuadg.getDangvien','')}}/" + nam,
                 type: 'get'
             }).done(function (response) {
-                let dangvien = Object.values(response)
-                dangvien.unshift('Chọn đảng viên')
+                let dangvien = Object.values(response['dangvien'])
+                dangvien.unshift({id: '', text: 'Chọn đảng viên'})
                 $('#madv').empty().select2({
                     data: dangvien
                 })

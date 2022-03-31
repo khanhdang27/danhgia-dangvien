@@ -50,7 +50,7 @@
                         @foreach($data as $item)
                             <tr>
                                 <td>{{ $key++ }}</td>
-                                <td>{{ $item->madv }}</td>
+                                <td>{{ str_pad($item->madv,6,0, STR_PAD_LEFT) }}</td>
                                 <td>{{ $item->mavc }}</td>
                                 <td>{{ $item->hoten }}</td>
                                 <td>{{ \Carbon\Carbon::parse($item->ngaysinh)->format('d-m-Y') }}</td>

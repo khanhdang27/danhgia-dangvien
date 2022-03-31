@@ -21,7 +21,7 @@
         <div class="mb-3 d-flex justify-content-end group-btn">
             <a href="{{ route("get.cbtxl.create") }}" class="btn btn-primary"
                data-toggle="modal" data-target="#form-modal" data-title="Thêm đánh giá">
-                <i class="fa fa-plus"></i>&nbsp; Thêm mới
+                <i class="fa fa-plus"></i>&nbsp; Đánh giá
             </a>
         </div>
         <div class="listing">
@@ -55,7 +55,10 @@
                                     <td>{{ Rating::getXeploai($item->duk)}}</td>
                                     <td>{{ Rating::getXeploai($item->dut)}}</td>
                                     <td class="link-action">
-                                        @if(!in_array($item->name, ["Administrator"]))
+                                        @if( (int)$item->nam < $toyear || $item->duk != null || $item->dut != null)
+                                            <a href="#" class="btn btn-disable btn-primary"><i class="fa fa-pencil"></i></a>
+                                            <a href="#" class="btn btn-disable btn-danger"><i class="fa fa-trash"></i></a>
+                                        @else
                                             <a href="{{ route('get.cbtxl.update',['macb'=>$item->macb,'nam'=>$item->nam])}}"
                                                class="btn btn-primary"
                                                data-toggle="modal" data-target="#form-modal"
@@ -80,3 +83,18 @@
 
     {!! getModal(['class' => 'modal-ajax']) !!}
 @endsection
+@push('js')
+    <script>
+        $(document).on('click', '.btn-disable', function () {
+            $.toast({
+                heading: "Thất bại",
+                text: 'Bạn không có quyền thao tác dữ liệu này',
+                position: 'top-right',
+                loaderBg: '#ff6849',
+                icon: 'error',
+                hideAfter: 10000,
+                stack: 2
+            });
+        });
+    </script>
+@endpush

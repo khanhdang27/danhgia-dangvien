@@ -1,7 +1,7 @@
 <?php
 return [
     'name' => 'chuadg',
-    'display_name' => 'Đảng viên chưa kiểm điểm đánh giá',
+    'display_name' => 'Đảng Viên Chưa Kiểm Điểm Đánh Giá',
     'group' => [
         [
             'name' => 'chuadg-create',

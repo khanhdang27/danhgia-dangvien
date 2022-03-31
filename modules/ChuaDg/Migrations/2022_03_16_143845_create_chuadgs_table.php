@@ -12,7 +12,7 @@ class CreateChuaDgsTable extends Migration {
      */
     public function up() {
         Schema::create('chua_kddgs', function (Blueprint $table) {
-            $table->string('madv', 6);
+            $table->integer('madv');
             $table->string('nam', 4);
             $table->tinyInteger('chuakd')->default(0);
             $table->tinyInteger('chuadg')->default(0);

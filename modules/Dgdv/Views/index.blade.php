@@ -18,67 +18,133 @@
                 </div>
             </div>
         </div>
-        <div class="mb-3 d-flex justify-content-end group-btn">
-            <a href="{{ route("get.dgdv.create") }}" class="btn btn-primary">
-                <i class="fa fa-plus"></i>&nbsp; Thêm mới
-            </a>
-        </div>
         <div class="listing">
-            <div class="card">
-                <div class="card-body">
-                    <div class="sumary">
-                        {!! summaryListing($data) !!}
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
+            <div class="card bg-transparent">
+                <div class="card-body p-0">
+                    <div class="float-right bg-white p-3">
+                        <table>
                             <tr>
-                                <th>#</th>
-                                <th>Năm</th>
-                                <th>Họ tên</th>
-                                <th>Tự xếp loại</th>
-                                <th>Chính quyền xếp loại</th>
-                                <th>Chính uỷ xếp loại</th>
-                                <th>Chi bộ xếp loại</th>
-                                <th>Đoàn trường xếp loại</th>
-                                <th>Đảng uỷ khoa xếp loại</th>
-                                <th>Đảng uỷ trường xếp loại</th>
-                                <th class="action"></th>
+                                <td><p class="font-18 font-weight-bold">Chú thích:</p></td>
                             </tr>
-                            </thead>
-                            <tbody>
-
-                            @php($key = ($data->currentpage()-1)*$data->perpage()+1)
-                            @foreach($data as $item)
+                            @foreach($xeploai as $key=>$item)
                                 <tr>
-                                    <td>{{$key++}}</td>
-                                    <td>{{ $item->nam}}</td>
-                                    <td>{{ $item->dangvien != null ? $item->dangvien->hoten : ''}}</td>
-                                    <td>{{ Rating::getXeploai($item->txl)}}</td>
-                                    <td>{{ Rating::getXeploai($item->cqxl)}}</td>
-                                    <td>{{ Rating::getXeploai($item->cuxl)}}</td>
-                                    <td>{{ Rating::getXeploai($item->cbxl)}}</td>
-                                    <td>{{ Rating::getXeploai($item->dtxl)}}</td>
-                                    <td>{{ Rating::getXeploai($item->duk)}}</td>
-                                    <td>{{ Rating::getXeploai($item->dut)}}</td>
-                                    <td class="link-action">
-                                        @if(!in_array($item->name, ["Administrator"]))
-                                            <a href="{{ route('get.dgdv.update',['madv'=>$item->madv,'nam'=>$item->nam])}}"
-                                               class="btn btn-primary">
-                                                <i class="fa fa-pencil"></i></a>
-                                            <a href="{{ route('get.dgdv.delete',['madv'=>$item->madv,'nam'=>$item->nam]) }}"
-                                               class="btn btn-danger btn-delete"><i class="fa fa-trash"></i></a>
-                                        @endif
-                                    </td>
+                                    <td>{{$key}}: {{$item}}</td>
                                 </tr>
                             @endforeach
-                            </tbody>
                         </table>
-                        <div class="mt-5 pagination-style">
-                            {{ $data->withQueryString()->render('vendor/pagination/default') }}
-                        </div>
                     </div>
+
                 </div>
+            </div>
+            <div class="card">
+                <form action="" method="post" id="dgdv-form">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th>MSĐV</th>
+                                    <th>Họ tên</th>
+                                    <th>Tự xếp loại</th>
+                                    <th>Chính quyền xếp loại</th>
+                                    <th>Chi uỷ xếp loại</th>
+                                    <th>Chi bộ xếp loại</th>
+                                    <th>Đoàn trường xếp loại</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($data as $item)
+                                    <tr>
+                                        <td>{{ $item->madv != null ? str_pad($item->madv,6,0,STR_PAD_LEFT) : '' }}</td>
+                                        <td>{{ $item->hoten ?? ''}}</td>
+                                        <td>
+                                            <div class="d-flex">
+                                                @foreach($xeploai as $key => $xl)
+                                                    <div class="px-1 text-center">
+                                                        <div>
+                                                            <input style="width: 18px; height: 18px" type="radio"
+                                                                   id="txl{{$key}}" name="txl{{$item->madv}}"
+                                                                   value="{{$key}}" disabled
+                                                                {{ count($item->dgdv) > 0 ? ($item->dgdv[0]->txl == $key ? 'checked' : '') : ''}}
+                                                            >
+                                                        </div>
+                                                        <label class="font-16 mb-0" for="txl{{$key}}">{{$key}}</label>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex">
+                                                @foreach($xeploai as $key => $xl)
+                                                    <div class="px-1 text-center">
+                                                        <div>
+                                                            <input style="width: 18px; height: 18px" type="radio"
+                                                                   id="cqxl{{$key}}" name="{{$item->madv}}[cqxl]"
+                                                                   value="{{$key}}"
+                                                                {{ count($item->dgdv) > 0 ? ($item->dgdv[0]->cqxl == $key ? 'checked' : '') : ''}}
+                                                            >
+                                                        </div>
+                                                        <label class="font-16 mb-0" for="cqxl{{$key}}">{{$key}}</label>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex">
+                                                @foreach($xeploai as $key => $xl)
+                                                    <div class="px-1 text-center">
+                                                        <div>
+                                                            <input style="width: 18px; height: 18px" type="radio"
+                                                                   id="cuxl{{$key}}" name="{{$item->madv}}[cuxl]"
+                                                                   value="{{$key}}"
+                                                                {{ count($item->dgdv) > 0 ? ($item->dgdv[0]->cuxl == $key ? 'checked' : '') : ''}}
+                                                            >
+                                                        </div>
+                                                        <label class="font-16 mb-0" for="cuxl{{$key}}">{{$key}}</label>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex">
+                                                @foreach($xeploai as $key => $xl)
+                                                    <div class="px-1 text-center">
+                                                        <div>
+                                                            <input style="width: 18px; height: 18px" type="radio"
+                                                                   id="cbxl{{$key}}" name="{{$item->madv}}[cbxl]"
+                                                                   value="{{$key}}"
+                                                                {{ count($item->dgdv) > 0 ? ($item->dgdv[0]->cbxl == $key ? 'checked' : '') : ''}}
+                                                            >
+                                                        </div>
+                                                        <label class="font-16 mb-0" for="cbxl{{$key}}">{{$key}}</label>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex">
+                                                @foreach($xeploai as $key => $xl)
+                                                    <div class="px-1 text-center">
+                                                        <div>
+                                                            <input style="width: 18px; height: 18px" type="radio"
+                                                                   id="dtxl{{$key}}" name="{{$item->madv}}[dtxl]"
+                                                                   value="{{$key}}"
+                                                                {{ count($item->dgdv) > 0 ? ($item->dgdv[0]->dtxl == $key ? 'checked' : '') : ''}}
+                                                            >
+                                                        </div>
+                                                        <label class="font-16 mb-0" for="dtxl{{$key}}">{{$key}}</label>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                        <button type="submit" class="btn btn-info mr-2">Lưu</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

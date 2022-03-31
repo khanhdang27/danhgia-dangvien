@@ -35,7 +35,7 @@
         </div>
         <div class="row form-group">
             <div class="col-md-4">
-                <label for="cuxl">Chính uỷ xếp loại</label>
+                <label for="cuxl">Chi uỷ xếp loại</label>
             </div>
             <div class="col-md-8">
                 {!! Form::select('cuxl', $prompt+$xeploai, $data->cuxl ?? NULL, [

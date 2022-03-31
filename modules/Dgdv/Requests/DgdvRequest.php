@@ -40,7 +40,7 @@ class DgdvRequest extends FormRequest {
         return [
             'madv' => 'Đảng viên',
             'cqxl' => 'Chính quyền xếp loại',
-            'cuxl' => 'Chính uỷ xếp loại',
+            'cuxl' => 'Chi uỷ xếp loại',
             'cbxl' => 'Chi bộ xếp loại',
             'dtxl' => 'Đoàn trường xếp loại',
         ];

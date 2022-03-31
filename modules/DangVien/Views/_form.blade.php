@@ -1,5 +1,5 @@
 <div class="card">
-    <form action="" method="post" class="form-material" >
+    <form action="" method="post" class="form-material">
         @csrf
         <div id="member-info">
             <div class="card-header">
@@ -9,14 +9,9 @@
                 <div class="row">
                     <div class="col-md-4 form-group">
                         <label for="macb">Chi bộ</label>
-                        {!! Form::select('macb', $chibo, $data->macb ?? NULL, [
+                        {!! Form::select('macb', $chibo, isset($dangvien) ? ($dangvien->macb ?? NULL) : NULL, [
                        'id' => 'macb',
                        'class' => 'select2 form-control',]) !!}
-                    </div>
-                    <div class="col-md-4 form-group">
-                        <label for="madv">Mã đảng viên</label>
-                        <input type="text" id="madv" class="form-control" name="madv"
-                               value="{{ $dangvien->madv ?? old('madv') }}">
                     </div>
                     <div class="col-md-4 form-group">
                         <label for="mavc">Mã viên chức</label>
@@ -37,8 +32,12 @@
                     <div class="col-md-4 form-group">
                         <label for="gioitinh">Giới tinh</label>
                         <select name="gioitinh" id="gioitinh" class="form-control select2">
-                            <option value="1">Nam</option>
-                            <option value="0">Nữ</option>
+                            <option {{isset($dangvien)? ($dangvien->gioitinh == 1 ? 'selected' : '') : ''}} value="1">
+                                Nam
+                            </option>
+                            <option {{isset($dangvien)? ($dangvien->gioitinh == 0 ? 'selected' : '') : ''}} value="0">
+                                Nữ
+                            </option>
                         </select>
                     </div>
                     <div class="col-md-4 form-group">

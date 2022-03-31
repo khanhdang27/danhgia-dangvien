@@ -49,10 +49,15 @@ class ChuaDgController extends Controller {
         $chibo    = ChiBo::query()->where('user_id', Auth::id())->first();
         $nam      = Nam::all()->pluck('nam', 'nam')->toArray();
         $toyear   = Carbon::now()->year;
-        $dgdv     = Dgdv::query()->where('nam', $toyear)->pluck('madv');
-        $dangvien = DangVien::query()->where('macb', $chibo->macb)->whereNotIn('madv', $dgdv)->pluck('hoten', 'madv');
+        $dgdv     = Dgdv::query()->where('nam', $toyear)->whereNotNull('txl')->pluck('madv');
+        $chuadg   = ChuaDg::query()->where('nam', $toyear)->pluck('madv');
+        $dangvien = DangVien::query()
+                            ->where('macb', $chibo->macb)
+                            ->whereNotIn('madv', $dgdv)
+                            ->whereNotIn('madv', $chuadg)
+                            ->pluck('hoten', 'madv');
         $dangvien = $dangvien->map(function ($dv, $key) {
-            return $key . ' - ' . $dv;
+            return str_pad($key, 6, 0, 0) . ' - ' . $dv;
         })->toArray();
         return view('ChuaDg::create', compact('dangvien', 'nam', 'toyear'));
     }
@@ -68,7 +73,7 @@ class ChuaDgController extends Controller {
             ChuaDg::create($data);
         else {
             $request->session()->flash('danger', 'Đã có dữ liệu của đảng viên này ở năm ' . $data['nam']);
-            return back();
+            return back()->withInput();
         }
 
         $request->session()->flash('success', trans('Thêm mới thành công'));
@@ -83,12 +88,18 @@ class ChuaDgController extends Controller {
     public function getUpdate($madv, $nam) {
         $chibo    = ChiBo::query()->where('user_id', Auth::id())->first();
         $data     = ChuaDg::query()->where('madv', $madv)->where('nam', $nam)->first();
-        $dangvien = DangVien::query()->where('macb', $chibo->macb)->pluck('hoten', 'madv');
+        $toyear   = Carbon::now()->year;
+        $dgdv     = Dgdv::query()->where('nam', $nam)->whereNotNull('txl')->pluck('madv');
+        $chuadg   = ChuaDg::query()->where('nam', $nam)->where('madv','<>',$madv)->pluck('madv');
+        $dangvien = DangVien::query()
+                            ->where('macb', $chibo->macb)
+                            ->whereNotIn('madv', $dgdv)
+                            ->whereNotIn('madv', $chuadg)
+                            ->pluck('hoten', 'madv');
         $dangvien = $dangvien->map(function ($dv, $key) {
-            return $key . ' - ' . $dv;
+            return str_pad($key, 6, 0, 0) . ' - ' . $dv;
         })->toArray();
         $nam      = Nam::all()->pluck('nam', 'nam')->toArray();
-        $toyear   = Carbon::now()->year;
         return view('ChuaDg::update', compact('data', 'dangvien', 'nam', 'toyear'));
     }
 
@@ -136,12 +147,19 @@ class ChuaDgController extends Controller {
 
     public function getDangvien($nam) {
         $chibo    = ChiBo::query()->where('user_id', Auth::id())->first();
-        $dgdv     = Dgdv::query()->where('nam', $nam)->pluck('madv');
-        $dangvien = DangVien::query()->where('macb', $chibo->macb)->whereNotIn('madv', $dgdv)->pluck('hoten', 'madv');
+        $dgdv     = Dgdv::query()->where('nam', $nam)->whereNotNull('txl')->pluck('madv');
+        $chuadg   = ChuaDg::query()->where('nam', $nam)->pluck('madv');
+        $dangvien = DangVien::query()
+                            ->where('macb', $chibo->macb)
+                            ->whereNotIn('madv', $dgdv)
+                            ->whereNotIn('madv', $chuadg)
+                            ->pluck('hoten', 'madv');
+
         $dangvien = $dangvien->map(function ($dv, $key) {
-            return $key . ' - ' . $dv;
+            return (object)['id' => $key, 'text' => str_pad($key, 6, 0, 0) . ' - ' . $dv];
         })->toArray();
-//        return response()->json(['dangvien' => $dangvien]);
-        return $dangvien;
+
+        return response()->json(['dangvien' => $dangvien]);
+//        return $dangvien;
     }
 }

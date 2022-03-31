@@ -50,7 +50,7 @@
                             <tr>
                                 <td>{{ $key++ }}</td>
                                 <td>{{ $item->nam }}</td>
-                                <td>{{ $item->madv }}</td>
+                                <td>{{ str_pad($item->madv,6,0,0) }}</td>
                                 <td>{{ $item->dangvien != null ? $item->dangvien->hoten : '' }}</td>
                                 <td>{{ $item->dangvien != null ? ($item->dangvien->chibo != null ? $item->dangvien->chibo->tencb : '') : '' }}</td>
                                 <td>{{ $item->dangvien != null ? \Carbon\Carbon::parse($item->dangvien->ngaychinhthuc)->format('d-m-Y') : '' }}</td>

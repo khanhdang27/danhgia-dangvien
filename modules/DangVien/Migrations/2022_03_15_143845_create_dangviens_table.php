@@ -12,7 +12,7 @@ class CreateDangViensTable extends Migration{
      */
     public function up(){
         Schema::create('dangviens', function(Blueprint $table){
-            $table->string('madv',6)->primary();
+            $table->integer('madv')->autoIncrement();
             $table->string('mavc',6)->nullable();
             $table->string('macb',20)->nullable();
             $table->string('hoten')->nullable();

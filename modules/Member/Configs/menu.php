@@ -2,7 +2,7 @@
 return [
     'name' => trans('Member'),
     'route' => route('get.member.list'),
-    'sort' => 2,
+    'sort' => 15,
     'active'=> TRUE,
     'id'=> 'member',
     'icon' => '<i class="icon-people"></i>',

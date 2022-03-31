@@ -38,7 +38,7 @@
                                 <th>Họ tên</th>
                                 <th>Tự xếp loại</th>
                                 <th>Chính quyền xếp loại</th>
-                                <th>Chính uỷ xếp loại</th>
+                                <th>Chi uỷ xếp loại</th>
                                 <th>Chi bộ xếp loại</th>
                                 <th>Đoàn trường xếp loại</th>
                                 <th>Đảng uỷ khoa xếp loại</th>

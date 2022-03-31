@@ -12,7 +12,7 @@ class CreateDgdvsTable extends Migration{
      */
     public function up(){
         Schema::create('dgdvs', function(Blueprint $table){
-            $table->string('madv', 6);
+            $table->integer('madv');
             $table->string('nam', 4);
             $table->string('txl',10)->nullable();
             $table->string('cqxl',10)->nullable();

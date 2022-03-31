@@ -4,6 +4,7 @@ namespace Modules\DangVien\Models;
 
 use Modules\Base\Models\BaseModel;
 use Modules\ChiBo\Models\ChiBo;
+use Modules\Dgdv\Models\Dgdv;
 
 class DangVien extends BaseModel {
     protected $table = "dangviens";
@@ -26,5 +27,9 @@ class DangVien extends BaseModel {
 
     public function chibo() {
         return $this->belongsTo(ChiBo::class, 'macb', 'macb');
+    }
+
+    public function dgdv() {
+        return $this->hasMany(Dgdv::class,'madv','madv');
     }
 }

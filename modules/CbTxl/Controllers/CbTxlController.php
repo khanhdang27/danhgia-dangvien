@@ -35,8 +35,9 @@ class CbTxlController extends Controller {
         $chibo    = ChiBo::query()->where('user_id', Auth::id())->first();
         $data = Dgcb::query()->where('macb',$chibo->macb);
         $data = $data->orderBy('nam')->paginate(20);
+        $toyear  = Carbon::now()->year;
 
-        return view("CbTxl::index", compact('data'));
+        return view("CbTxl::index", compact('data','toyear'));
     }
 
     /**
@@ -45,8 +46,8 @@ class CbTxlController extends Controller {
      */
     public function getCreate(Request $request) {
         $xeploai = Rating::all()->pluck('tenxeploai', 'maxeploai')->toArray();
-        $nam     = Nam::all()->pluck('nam', 'nam')->toArray();
         $toyear  = Carbon::now()->year;
+        $nam     = Nam::query()->where('nam','>=',$toyear)->pluck('nam', 'nam')->toArray();
         if (!$request->ajax()) {
             return redirect()->back();
         }
@@ -63,8 +64,9 @@ class CbTxlController extends Controller {
         $chibo = ChiBo::query()->where('user_id', Auth::user()->id)->first();
         $txl   = Dgcb::query()->where('nam', $data['nam'])->where('macb', $chibo->macb)->first();
         if ($txl != null) {
-            $txl->update($data);
-            $request->session()->flash('success', trans('Cập nhật thành công'));
+//            $txl->update($data);
+            $request->session()->flash('danger', trans('Năm này đã đánh giá rồi'));
+            return back();
         } else {
             Dgcb::create([
                 'macb' => $chibo->macb,
@@ -85,8 +87,8 @@ class CbTxlController extends Controller {
     public function getUpdate(Request $request, $macb, $nam) {
         $data    = Dgcb::query()->where('nam', $nam)->where('macb', $macb)->first();
         $xeploai = Rating::all()->pluck('tenxeploai', 'maxeploai')->toArray();
-        $nam     = Nam::all()->pluck('nam', 'nam')->toArray();
         $toyear  = Carbon::now()->year;
+        $nam     = Nam::query()->where('nam','>=',$toyear)->pluck('nam', 'nam')->toArray();
         return view('CbTxl::form', compact('data', 'xeploai', 'nam', 'toyear'));
     }
 
