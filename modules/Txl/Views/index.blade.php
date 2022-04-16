@@ -41,9 +41,9 @@
                                 <th>Chính quyền xếp loại</th>
                                 <th>Chi uỷ xếp loại</th>
                                 <th>Chi bộ xếp loại</th>
-                                <th>Đoàn trường xếp loại</th>
+{{--                                <th>Đoàn trường xếp loại</th>--}}
                                 <th>Đảng uỷ khoa xếp loại</th>
-                                <th>Đảng uỷ trường xếp loại</th>
+{{--                                <th>Đảng uỷ trường xếp loại</th>--}}
                                 <th class="action"></th>
                             </tr>
                             </thead>
@@ -59,9 +59,9 @@
                                     <td>{{ Rating::getXeploai($item->cqxl)}}</td>
                                     <td>{{ Rating::getXeploai($item->cuxl)}}</td>
                                     <td>{{ Rating::getXeploai($item->cbxl)}}</td>
-                                    <td>{{ Rating::getXeploai($item->dtxl)}}</td>
+{{--                                    <td>{{ Rating::getXeploai($item->dtxl)}}</td>--}}
                                     <td>{{ Rating::getXeploai($item->duk)}}</td>
-                                    <td>{{ Rating::getXeploai($item->dut)}}</td>
+{{--                                    <td>{{ Rating::getXeploai($item->dut)}}</td>--}}
                                     <td class="link-action">
                                         @if( (int)$item->nam < $toyear || $item->cqxl != null || $item->cuxl != null || $item->cbxl != null || $item->dtxl != null || $item->dut != null || $item->duk != null)
                                             <a href="#" class="btn btn-disable btn-primary"><i class="fa fa-pencil"></i></a>

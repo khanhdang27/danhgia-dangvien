@@ -2,10 +2,10 @@
 return [
     'name' => 'Xếp loại',
     'route' => route('get.rating.list'),
-    'sort' => 9,
+    'sort' => 2,
     'active'=> TRUE,
     'id'=> 'rating',
-    'icon' => '<i class="fa fa-users"></i>',
+    'icon' => '<i class="fa fa-star-half-o"></i>',
     'middleware' => ['rating'],
     'group' => []
 ];

@@ -18,24 +18,62 @@
                 </div>
             </div>
         </div>
-        <div class="listing">
-            <div class="card bg-transparent">
-                <div class="card-body p-0">
-                    <div class="float-right bg-white p-3">
-                        <table>
-                            <tr>
-                                <td><p class="font-18 font-weight-bold">Chú thích:</p></td>
-                            </tr>
-                            @foreach($xeploai as $key=>$item)
-                                <tr>
-                                    <td>{{$key}}: {{$item}}</td>
-                                </tr>
-                            @endforeach
-                        </table>
+        <div class="row">
+            <div class="col-10">
+                <div class="search-box">
+                    <div class="card">
+                        <div class="card-header" data-toggle="collapse" data-target="#form-search-box" aria-expanded="false"
+                             aria-controls="form-search-box">
+                            <div class="title">Lọc</div>
+                        </div>
+                        <div class="card-body collapse show" id="form-search-box">
+                            <form action="" method="get">
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <label for="chibo">Chi bộ</label>
+                                            <select name="chibo" id="chibo" class="select2 form-control">
+                                                <option value="">Tất cả</option>
+                                                @foreach($chibo as $key => $cb)
+                                                    <option value="{{ $key }}"
+                                                            @if(isset($filter['chibo']) && $filter['chibo'] == $key) selected @endif>{{ $cb }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="input-group">
+                                    <button type="submit" class="btn btn-info mr-2">Lọc</button>
+                                    <button type="button" class="btn btn-default clear">Huỷ</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-
                 </div>
             </div>
+            <div class="col-2">
+                <div class="card bg-transparent">
+                    <div class="card-body p-0">
+                        <div class="bg-white p-3">
+                            <table>
+                                <tr>
+                                    <td><p class="font-18 font-weight-bold">Chú thích:</p></td>
+                                </tr>
+                                @foreach($xeploai as $key=>$item)
+                                    <tr>
+                                        <td>{{$key}}: {{$item}}</td>
+                                    </tr>
+                                @endforeach
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="listing">
+
             <div class="card">
                 <form action="" method="post" id="dgdv-form">
                     <div class="card-body">
@@ -49,7 +87,7 @@
                                     <th>Chính quyền xếp loại</th>
                                     <th>Chi uỷ xếp loại</th>
                                     <th>Chi bộ xếp loại</th>
-{{--                                    <th>Đoàn trường xếp loại</th>--}}
+                                    <th>Đảng uỷ khoa xếp loại</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -80,7 +118,7 @@
                                                         <div>
                                                             <input style="width: 18px; height: 18px" type="radio"
                                                                    id="{{$item->madv}}cqxl{{$key}}" name="{{$item->madv}}[cqxl]"
-                                                                   value="{{$key}}" {{count($item->dgdv) > 0 ? ($item->dgdv[0]->duk != null ? 'disabled' : '') : ''}}
+                                                                   value="{{$key}}" disabled
                                                                 {{ count($item->dgdv) > 0 ? ($item->dgdv[0]->cqxl == $key ? 'checked' : '') : ''}}
                                                             >
                                                         </div>
@@ -96,7 +134,7 @@
                                                         <div>
                                                             <input style="width: 18px; height: 18px" type="radio"
                                                                    id="{{$item->madv}}cuxl{{$key}}" name="{{$item->madv}}[cuxl]"
-                                                                   value="{{$key}}" {{count($item->dgdv) > 0 ? ($item->dgdv[0]->duk != null ? 'disabled' : '') : ''}}
+                                                                   value="{{$key}}" disabled
                                                                 {{ count($item->dgdv) > 0 ? ($item->dgdv[0]->cuxl == $key ? 'checked' : '') : ''}}
                                                             >
                                                         </div>
@@ -112,7 +150,7 @@
                                                         <div>
                                                             <input style="width: 18px; height: 18px" type="radio"
                                                                    id="{{$item->madv}}cbxl{{$key}}" name="{{$item->madv}}[cbxl]"
-                                                                   value="{{$key}}" {{count($item->dgdv) > 0 ? ($item->dgdv[0]->duk != null ? 'disabled' : '') : ''}}
+                                                                   value="{{$key}}" disabled
                                                                 {{ count($item->dgdv) > 0 ? ($item->dgdv[0]->cbxl == $key ? 'checked' : '') : ''}}
                                                             >
                                                         </div>
@@ -121,22 +159,22 @@
                                                 @endforeach
                                             </div>
                                         </td>
-{{--                                        <td>--}}
-{{--                                            <div class="d-flex">--}}
-{{--                                                @foreach($xeploai as $key => $xl)--}}
-{{--                                                    <div class="px-1 text-center">--}}
-{{--                                                        <div>--}}
-{{--                                                            <input style="width: 18px; height: 18px" type="radio"--}}
-{{--                                                                   id="dtxl{{$key}}" name="{{$item->madv}}[dtxl]"--}}
-{{--                                                                   value="{{$key}}"--}}
-{{--                                                                {{ count($item->dgdv) > 0 ? ($item->dgdv[0]->dtxl == $key ? 'checked' : '') : ''}}--}}
-{{--                                                            >--}}
-{{--                                                        </div>--}}
-{{--                                                        <label class="font-16 mb-0" for="dtxl{{$key}}">{{$key}}</label>--}}
-{{--                                                    </div>--}}
-{{--                                                @endforeach--}}
-{{--                                            </div>--}}
-{{--                                        </td>--}}
+                                        <td>
+                                            <div class="d-flex">
+                                                @foreach($xeploai as $key => $xl)
+                                                    <div class="px-1 text-center">
+                                                        <div>
+                                                            <input style="width: 18px; height: 18px" type="radio"
+                                                                   id="{{$item->madv}}duk{{$key}}" name="{{$item->madv}}[duk]"
+                                                                   value="{{$key}}"
+                                                                {{ count($item->dgdv) > 0 ? ($item->dgdv[0]->duk != null ? ($item->dgdv[0]->duk == $key ? 'checked' : '') : ($item->dgdv[0]->cbxl == $key ? 'checked' : '')) : ''}}
+                                                            >
+                                                        </div>
+                                                        <label class="font-16 mb-0" for="{{$item->madv}}duk{{$key}}">{{$key}}</label>
+                                                    </div>
+                                                @endforeach
+                                            </div>
+                                        </td>
                                     </tr>
                                 @endforeach
                                 </tbody>

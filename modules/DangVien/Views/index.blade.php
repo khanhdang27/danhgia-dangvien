@@ -21,7 +21,39 @@
             </a>
         </div>
     </div>
-
+    <!--Search box-->
+    @if(\Illuminate\Support\Facades\Auth::user()->role_id == 2)
+        <div class="search-box">
+            <div class="card">
+                <div class="card-header" data-toggle="collapse" data-target="#form-search-box" aria-expanded="false"
+                     aria-controls="form-search-box">
+                    <div class="title">Lọc</div>
+                </div>
+                <div class="card-body collapse show" id="form-search-box">
+                    <form action="" method="get">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label for="chibo">Chi bộ</label>
+                                    <select name="chibo" id="chibo" class="select2 form-control">
+                                        <option value="">Tất cả</option>
+                                        @foreach($chibo as $key => $cb)
+                                            <option value="{{ $key }}"
+                                                    @if(isset($filter['chibo']) && $filter['chibo'] == $key) selected @endif>{{ $cb }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <button type="submit" class="btn btn-info mr-2">Lọc</button>
+                            <button type="button" class="btn btn-default clear">Huỷ</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    @endif
     <div class="listing">
         <div class="card">
             <div class="card-body">

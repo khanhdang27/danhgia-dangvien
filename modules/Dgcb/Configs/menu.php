@@ -2,10 +2,10 @@
 return [
     'name' => 'Đánh giá chi bộ',
     'route' => route('get.dgcb.list'),
-    'sort' => 5,
+    'sort' => 2,
     'active'=> TRUE,
     'id'=> 'dgcb',
-    'icon' => '<i class="icon-people"></i>',
+    'icon' => '<i class="fa fa-list-ol"></i>',
     'middleware' => ['dgcb'],
     'group' => []
 ];

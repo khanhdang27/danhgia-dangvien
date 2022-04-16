@@ -2,10 +2,10 @@
 return [
     'name' => 'Chi bộ',
     'route' => route('get.chibo.list'),
-    'sort' => 3,
+    'sort' => 2,
     'active'=> TRUE,
     'id'=> 'chibo',
-    'icon' => '<i class="mdi mdi-account-key"></i>',
+    'icon' => '<i class="icon-people"></i>',
     'middleware' => ['chibo'],
     'group' => []
 ];

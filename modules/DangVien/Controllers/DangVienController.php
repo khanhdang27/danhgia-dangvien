@@ -8,6 +8,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Modules\ChiBo\Models\ChiBo;
 use Modules\DangVien\Models\DangVien;
@@ -30,8 +31,19 @@ class DangVienController extends Controller {
      * @return Application|Factory|View
      */
     public function index(Request $request) {
-        $data = DangVien::query()->orderBy('madv')->paginate(15);
-        return view("DangVien::index", compact('data'));
+        if(Auth::user()->role_id == 2){
+            // Dang uy khoa
+            $filter = $request->all();
+            $chibo = ChiBo::all()->pluck('tencb','macb');
+            $data = DangVien::filter($filter)->orderBy('madv')->paginate(15);
+            return view("DangVien::index", compact('chibo','data', 'filter'));
+
+        }else{
+            //Chi bo
+            $chibo = ChiBo::query()->where('user_id',Auth::id())->first();
+            $data = DangVien::query()->where('macb',$chibo->macb)->orderBy('madv')->paginate(15);
+            return view("DangVien::index", compact('data'));
+        }
     }
 
     /**
@@ -40,7 +52,8 @@ class DangVienController extends Controller {
      */
     public function getCreate() {
         $chibo = ChiBo::all()->pluck('tencb', 'macb')->toArray();
-        return view('DangVien::create', compact('chibo'));
+        $cb = ChiBo::query()->where('user_id',Auth::id())->first();
+        return view('DangVien::create', compact('cb','chibo'));
     }
 
     /**
@@ -63,7 +76,9 @@ class DangVienController extends Controller {
         unset($data['username']);
         unset($data['password']);
         $data['user_id'] = $user->id;
-
+        $cb = ChiBo::query()->where('user_id',Auth::id())->first();
+        if($cb != null)
+            $data['macb'] = $cb->macb;
         $dangvien = new DangVien($data);
         $dangvien->save();
 
@@ -80,7 +95,8 @@ class DangVienController extends Controller {
         $chibo    = ChiBo::all()->pluck('tencb', 'macb')->toArray();
         $dangvien = DangVien::query()->find($id);
         $user     = User::query()->find($dangvien->user_id);
-        return view('DangVien::update', compact('dangvien', 'chibo', 'user'));
+        $cb = ChiBo::query()->where('user_id',Auth::id())->first();
+        return view('DangVien::update', compact('cb','dangvien', 'chibo', 'user'));
     }
 
     /**

@@ -39,7 +39,7 @@
                                 <th>Chi bộ</th>
                                 <th>Tự xếp loại</th>
                                 <th>Đảng uỷ khoa xếp loại</th>
-                                <th>Đảng uỷ trường xếp loại</th>
+{{--                                <th>Đảng uỷ trường xếp loại</th>--}}
                                 <th class="action"></th>
                             </tr>
                             </thead>
@@ -53,7 +53,7 @@
                                     <td>{{ $item->chibo != null ? $item->chibo->tencb : ''}}</td>
                                     <td>{{ Rating::getXeploai($item->txl)}}</td>
                                     <td>{{ Rating::getXeploai($item->duk)}}</td>
-                                    <td>{{ Rating::getXeploai($item->dut)}}</td>
+{{--                                    <td>{{ Rating::getXeploai($item->dut)}}</td>--}}
                                     <td class="link-action">
                                         @if( (int)$item->nam < $toyear || $item->duk != null || $item->dut != null)
                                             <a href="#" class="btn btn-disable btn-primary"><i class="fa fa-pencil"></i></a>

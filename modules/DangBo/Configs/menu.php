@@ -5,7 +5,7 @@ return [
     'sort' => 2,
     'active'=> TRUE,
     'id'=> 'dangbo',
-    'icon' => '<i class="mdi mdi-account-key"></i>',
+    'icon' => '<i class="icon-people"></i>',
     'middleware' => ['dangbo'],
     'group' => []
 ];

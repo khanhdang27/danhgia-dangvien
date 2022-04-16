@@ -2,10 +2,10 @@
 return [
     'name' => 'Chi bộ tự xếp loại',
     'route' => route('get.cbtxl.list'),
-    'sort' => 5,
+    'sort' => 2,
     'active'=> TRUE,
     'id'=> 'cbtxl',
-    'icon' => '<i class="icon-people"></i>',
+    'icon' => '<i class="fa fa-list-ol"></i>',
     'middleware' => ['cbtxl'],
     'group' => []
 ];

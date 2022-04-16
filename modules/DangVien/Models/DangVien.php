@@ -32,4 +32,13 @@ class DangVien extends BaseModel {
     public function dgdv() {
         return $this->hasMany(Dgdv::class,'madv','madv');
     }
+
+    public static function filter($filter) {
+        $query = self::query();
+        if (isset($filter['chibo'])) {
+            $query->where('macb', $filter['chibo']);
+        }
+
+        return $query;
+    }
 }

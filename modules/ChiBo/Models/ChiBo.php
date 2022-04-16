@@ -2,9 +2,9 @@
 
 namespace Modules\ChiBo\Models;
 
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Base\Models\BaseModel;
 use Modules\DangBo\Models\DangBo;
+use Modules\Dgcb\Models\Dgcb;
 
 class ChiBo extends BaseModel {
 
@@ -22,5 +22,9 @@ class ChiBo extends BaseModel {
 
     public function dangbo() {
         return $this->belongsTo(DangBo::class, 'madb','madb');
+    }
+
+    public function dgcb() {
+        return $this->hasMany(Dgcb::class,'macb','macb');
     }
 }

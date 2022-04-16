@@ -50,39 +50,39 @@
                                                            @endif
                                                            @if(\Modules\Role\Models\Role::getAdminRole()->id === $role->id) disabled {{\Modules\Role\Models\Role::getAdminRole()->id === $role->id }}
                                                            @endif
-                                                           class="custom-control-input checkbox-item select-all"
+                                                           class="custom-control-input checkbox-item"
                                                            id="role-{{ $permission->id }}-{{ $role->id }}">
                                                     <label class="custom-control-label" for="role-{{ $permission->id }}-{{ $role->id }}"></label>
                                                 </div>
                                             </td>
                                         @endforeach
                                     </tr>
-                                    @if(!empty($permission->child))
-                                        @foreach($permission->child as $child)
-                                            <tr>
-                                                <td>{{ $key++ }}</td>
-                                                <td>
-                                                    <div class="ml-2">- {{ trans($child->display_name) }}</div>
-                                                </td>
-                                                @foreach($roles as $role)
-                                                    <td style="text-align: center;">
-                                                        <div class="custom-control custom-checkbox">
-                                                            <input type="checkbox"
-                                                                   name='role_permission[{{$role->id}}][]'
-                                                                   value="{{ $child->id }}"
-                                                                   @if(\Modules\Permission\Models\PermissionRole::checkRolePermission($child->id, $role->id)) checked
-                                                                   @endif
-                                                                   @if(\Modules\Role\Models\Role::getAdminRole()->id === $role->id) disabled
-                                                                   @endif
-                                                                   class="custom-control-input checkbox-item role-{{ $permission->id }}-{{ $role->id }}"
-                                                                   id="role-{{ $child->id }}-{{ $role->id }}">
-                                                            <label class="custom-control-label" for="role-{{ $child->id }}-{{ $role->id }}"></label>
-                                                        </div>
-                                                    </td>
-                                                @endforeach
-                                            </tr>
-                                        @endforeach
-                                    @endif
+{{--                                    @if(!empty($permission->child))--}}
+{{--                                        @foreach($permission->child as $child)--}}
+{{--                                            <tr>--}}
+{{--                                                <td>{{ $key++ }}</td>--}}
+{{--                                                <td>--}}
+{{--                                                    <div class="ml-2">- {{ trans($child->display_name) }}</div>--}}
+{{--                                                </td>--}}
+{{--                                                @foreach($roles as $role)--}}
+{{--                                                    <td style="text-align: center;">--}}
+{{--                                                        <div class="custom-control custom-checkbox">--}}
+{{--                                                            <input type="checkbox"--}}
+{{--                                                                   name='role_permission[{{$role->id}}][]'--}}
+{{--                                                                   value="{{ $child->id }}"--}}
+{{--                                                                   @if(\Modules\Permission\Models\PermissionRole::checkRolePermission($child->id, $role->id)) checked--}}
+{{--                                                                   @endif--}}
+{{--                                                                   @if(\Modules\Role\Models\Role::getAdminRole()->id === $role->id) disabled--}}
+{{--                                                                   @endif--}}
+{{--                                                                   class="custom-control-input checkbox-item role-{{ $permission->id }}-{{ $role->id }}"--}}
+{{--                                                                   id="role-{{ $child->id }}-{{ $role->id }}">--}}
+{{--                                                            <label class="custom-control-label" for="role-{{ $child->id }}-{{ $role->id }}"></label>--}}
+{{--                                                        </div>--}}
+{{--                                                    </td>--}}
+{{--                                                @endforeach--}}
+{{--                                            </tr>--}}
+{{--                                        @endforeach--}}
+{{--                                    @endif--}}
                                 @endif
                             @endforeach
                             </tbody>

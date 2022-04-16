@@ -7,12 +7,14 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-4 form-group">
-                        <label for="macb">Chi bộ</label>
-                        {!! Form::select('macb', $chibo, isset($dangvien) ? ($dangvien->macb ?? NULL) : NULL, [
-                       'id' => 'macb',
-                       'class' => 'select2 form-control',]) !!}
-                    </div>
+                    @if($cb == null)
+                        <div class="col-md-4 form-group">
+                            <label for="macb">Chi bộ</label>
+                            {!! Form::select('macb', $chibo, isset($dangvien) ? ($dangvien->macb ?? NULL) : NULL, [
+                           'id' => 'macb',
+                           'class' => 'select2 form-control',]) !!}
+                        </div>
+                    @endif
                     <div class="col-md-4 form-group">
                         <label for="mavc">Mã viên chức</label>
                         <input type="text" id="mavc" class="form-control" name="mavc"
