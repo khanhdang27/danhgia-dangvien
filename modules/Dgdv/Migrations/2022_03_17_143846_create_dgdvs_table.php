@@ -25,13 +25,13 @@ class CreateDgdvsTable extends Migration{
             $table->primary(['madv', 'nam']);
             $table->foreign('madv')->references('madv')->on('dangviens')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreign('nam')->references('nam')->on('nams')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreign('txl')->references('maxeploai')->on('xeploais')->nullOnDelete()->nullOnDelete();
-            $table->foreign('cqxl')->references('maxeploai')->on('xeploais')->nullOnDelete()->nullOnDelete();
-            $table->foreign('cuxl')->references('maxeploai')->on('xeploais')->nullOnDelete()->nullOnDelete();
-            $table->foreign('cbxl')->references('maxeploai')->on('xeploais')->nullOnDelete()->nullOnDelete();
-            $table->foreign('dtxl')->references('maxeploai')->on('xeploais')->nullOnDelete()->nullOnDelete();
-            $table->foreign('duk')->references('maxeploai')->on('xeploais')->nullOnDelete()->nullOnDelete();
-            $table->foreign('dut')->references('maxeploai')->on('xeploais')->nullOnDelete()->nullOnDelete();
+            $table->foreign('txl')->references('maxeploai')->on('xeploais')->cascadeOnUpdate()->nullOnDelete();
+            $table->foreign('cqxl')->references('maxeploai')->on('xeploais')->cascadeOnUpdate()->nullOnDelete();
+            $table->foreign('cuxl')->references('maxeploai')->on('xeploais')->cascadeOnUpdate()->nullOnDelete();
+            $table->foreign('cbxl')->references('maxeploai')->on('xeploais')->cascadeOnUpdate()->nullOnDelete();
+            $table->foreign('dtxl')->references('maxeploai')->on('xeploais')->cascadeOnUpdate()->nullOnDelete();
+            $table->foreign('duk')->references('maxeploai')->on('xeploais')->cascadeOnUpdate()->nullOnDelete();
+            $table->foreign('dut')->references('maxeploai')->on('xeploais')->cascadeOnUpdate()->nullOnDelete();
         });
     }
 

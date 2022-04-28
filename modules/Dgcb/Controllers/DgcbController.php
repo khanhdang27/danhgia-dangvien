@@ -32,7 +32,7 @@ class DgcbController extends Controller {
      */
     public function index(Request $request) {
         $nam     = Carbon::now()->year;
-        $xeploai = Rating::all()->pluck('tenxeploai', 'maxeploai')->toArray();
+        $xeploai = Rating::query()->orderBy('created_at')->pluck('tenxeploai', 'maxeploai')->toArray();
 
         $data = ChiBo::query()->with('dgcb', function ($query) use ($nam) {
             $query->where('nam', $nam);

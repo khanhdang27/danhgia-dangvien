@@ -2,7 +2,7 @@
 return [
     'name' => 'Đánh giá đảng viên',
     'route' => route('get.dgdv.list'),
-    'sort' => 2,
+    'sort' => 9,
     'active'=> TRUE,
     'id'=> 'dgdv',
     'icon' => '<i class="fa fa-list-ol"></i>',

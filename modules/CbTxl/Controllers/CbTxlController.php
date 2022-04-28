@@ -45,7 +45,7 @@ class CbTxlController extends Controller {
      * @return RedirectResponse|string
      */
     public function getCreate(Request $request) {
-        $xeploai = Rating::all()->pluck('tenxeploai', 'maxeploai')->toArray();
+        $xeploai = Rating::query()->orderBy('created_at')->pluck('tenxeploai', 'maxeploai')->toArray();
         $toyear  = Carbon::now()->year;
         $nam     = Nam::query()->where('nam','>=',$toyear)->pluck('nam', 'nam')->toArray();
         if (!$request->ajax()) {
@@ -86,7 +86,7 @@ class CbTxlController extends Controller {
      */
     public function getUpdate(Request $request, $macb, $nam) {
         $data    = Dgcb::query()->where('nam', $nam)->where('macb', $macb)->first();
-        $xeploai = Rating::all()->pluck('tenxeploai', 'maxeploai')->toArray();
+        $xeploai = Rating::query()->orderBy('created_at')->pluck('tenxeploai', 'maxeploai')->toArray();
         $toyear  = Carbon::now()->year;
         $nam     = Nam::query()->where('nam','>=',$toyear)->pluck('nam', 'nam')->toArray();
         return view('CbTxl::form', compact('data', 'xeploai', 'nam', 'toyear'));

@@ -32,7 +32,7 @@ class DgdvController extends Controller {
      */
     public function index(Request $request) {
         $nam     = Carbon::now()->year;
-        $xeploai = Rating::all()->pluck('tenxeploai', 'maxeploai')->toArray();
+        $xeploai = Rating::query()->orderBy('created_at')->pluck('tenxeploai', 'maxeploai')->toArray();
 
         if (Auth::user()->role_id == 2) {
             //dang uy khoa

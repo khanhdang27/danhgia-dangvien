@@ -16,7 +16,7 @@ class RatingController extends Controller {
      * @return Factory|View
      */
     public function index(Request $request) {
-        $data = Rating::query()->paginate(20);
+        $data = Rating::query()->orderBy('created_at')->paginate(20);
 
         return view("Rating::index", compact('data'));
     }

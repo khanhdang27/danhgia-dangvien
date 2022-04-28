@@ -21,9 +21,9 @@ class CreateDgcbsTable extends Migration{
             $table->primary(['macb', 'nam']);
             $table->foreign('macb')->references('macb')->on('chibos')->cascadeOnUpdate()->cascadeOnDelete();
             $table->foreign('nam')->references('nam')->on('nams')->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreign('txl')->references('maxeploai')->on('xeploais')->nullOnDelete()->nullOnDelete();
-            $table->foreign('duk')->references('maxeploai')->on('xeploais')->nullOnDelete()->nullOnDelete();
-            $table->foreign('dut')->references('maxeploai')->on('xeploais')->nullOnDelete()->nullOnDelete();
+            $table->foreign('txl')->references('maxeploai')->on('xeploais')->cascadeOnUpdate()->nullOnDelete();
+            $table->foreign('duk')->references('maxeploai')->on('xeploais')->cascadeOnUpdate()->nullOnDelete();
+            $table->foreign('dut')->references('maxeploai')->on('xeploais')->cascadeOnUpdate()->nullOnDelete();
         });
     }
 

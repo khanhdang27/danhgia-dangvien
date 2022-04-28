@@ -45,7 +45,7 @@ class TxlController extends Controller {
      * @return RedirectResponse|string
      */
     public function getCreate(Request $request) {
-        $xeploai = Rating::all()->pluck('tenxeploai', 'maxeploai')->toArray();
+        $xeploai = Rating::query()->orderBy('created_at')->pluck('tenxeploai', 'maxeploai')->toArray();
         $toyear  = Carbon::now()->year;
         $nam     = Nam::query()->where('nam','>=',$toyear)->pluck('nam', 'nam')->toArray();
         if (!$request->ajax()) {
@@ -90,7 +90,7 @@ class TxlController extends Controller {
      */
     public function getUpdate(Request $request, $madv, $nam) {
         $data    = Dgdv::query()->where('nam', $nam)->where('madv', $madv)->first();
-        $xeploai = Rating::all()->pluck('tenxeploai', 'maxeploai')->toArray();
+        $xeploai = Rating::query()->orderBy('created_at')->pluck('tenxeploai', 'maxeploai')->toArray();
         $toyear  = Carbon::now()->year;
         $nam     = Nam::query()->where('nam','>=',$toyear)->pluck('nam', 'nam')->toArray();
         return view('Txl::form', compact('data', 'xeploai', 'nam', 'toyear'));
