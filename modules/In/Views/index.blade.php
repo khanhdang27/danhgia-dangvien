@@ -23,12 +23,12 @@
             <div class="card-body">
                 <div id="maudon" class="row font-20">
                     <div class="col-md-6 mb-3">
-                        <a href="#" class="btn btn-info">
+                        <a href="{{route('get.in.printMau6')}}" class="btn btn-info">
                             Tổng hợp đề xuất mức chất lượng đảng viên của các chủ thể
                         </a>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <a href="#" class="btn btn-info">
+                        <a href="{{route('get.in.printMau7')}}" class="btn btn-info">
                             Quyết định - Công nhận xếp loại chất lượng đảng viên
                         </a>
                     </div>
