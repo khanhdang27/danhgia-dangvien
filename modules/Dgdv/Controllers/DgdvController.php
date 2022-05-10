@@ -10,6 +10,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Modules\ChiBo\Models\ChiBo;
+use Modules\ChuaDg\Models\Nam;
 use Modules\DangVien\Models\DangVien;
 use Modules\Dgdv\Models\Dgdv;
 use Modules\Rating\Models\Rating;
@@ -32,16 +33,22 @@ class DgdvController extends Controller {
      */
     public function index(Request $request) {
         $nam     = Carbon::now()->year;
+        $year     = Carbon::now()->year;
         $xeploai = Rating::query()->orderBy('created_at')->pluck('tenxeploai', 'maxeploai')->toArray();
 
         if (Auth::user()->role_id == 2) {
             //dang uy khoa
+            $nams = Nam::query()->where('nam', '<=', $nam)->orderByDesc('nam')->pluck('nam', 'nam')->toArray();
+
             $filter = $request->all();
-            $chibo  = ChiBo::all()->pluck('tencb', 'macb');
-            $data   = DangVien::filter($filter)->with('dgdv', function ($query) use ($nam) {
+            if ($filter && $filter['nam'])
+                $nam = $filter['nam'];
+
+            $chibo = ChiBo::all()->pluck('tencb', 'macb');
+            $data  = DangVien::filter($filter)->with('dgdv', function ($query) use ($nam) {
                 $query->where('nam', $nam);
             })->get();
-            return view("Dgdv::index_danguy", compact('data', 'xeploai', 'chibo', 'filter'));
+            return view("Dgdv::index_danguy", compact('data', 'xeploai', 'chibo', 'filter', 'nams','year'));
         } else {
             //chi bo
             $macb = ChiBo::query()->where('user_id', Auth::id())->first()->macb;
@@ -64,7 +71,7 @@ class DgdvController extends Controller {
     public function updateDgdv(Request $request) {
 
         $data = $request->post();
-        $nam = Carbon::now()->year;
+        $nam  = Carbon::now()->year;
         foreach ($data as $madv => $xeploai) {
             $dgdv = Dgdv::query()->where('nam', $nam)->where('madv', $madv)->first();
             if ($dgdv != null) {
@@ -77,7 +84,7 @@ class DgdvController extends Controller {
         }
         $request->session()->flash('success', trans('Cập nhật thành công'));
         $requestUrl = $request->getRequestUri();
-//        return redirect()->route('get.dgdv.list');
+        //        return redirect()->route('get.dgdv.list');
         return redirect($requestUrl);
     }
     //

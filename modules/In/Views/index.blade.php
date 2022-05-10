@@ -17,7 +17,7 @@
         </div>
         <div class="card">
             <div class="card-header">
-                <button id="btn-maudon" class="btn btn-primary font-18" style="width: 150px">Mẫu đơn</button>
+                <button id="btn-maudon" class="btn btn-primary font-18 active" style="width: 150px">Mẫu đơn</button>
                 <button id="btn-mauphieu" class="btn btn-primary font-18" style="width: 150px">Mẫu phiếu</button>
             </div>
             <div class="card-body">
@@ -92,10 +92,14 @@
         $('#btn-maudon').click(function () {
             $('#maudon').removeClass('d-none');
             $('#mauphieu').addClass('d-none');
+            $('#btn-maudon').addClass('active');
+            $('#btn-mauphieu').removeClass('active');
         });
         $('#btn-mauphieu').click(function () {
             $('#mauphieu').removeClass('d-none');
             $('#maudon').addClass('d-none');
+            $('#btn-mauphieu').addClass('active');
+            $('#btn-maudon').removeClass('active');
         });
     </script>
 @endpush

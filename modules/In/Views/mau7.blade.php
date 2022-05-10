@@ -76,7 +76,7 @@
                     <table class="mb-5">
                         <tr>
                             <td nowrap><p class="m-0 font-16 font-weight-bold">Điều 1.</p></td>
-                            <td><p class="m-0 font-16">Xếp loại chất lượng đảng viên năm {{$nam}} cho … đảng viên.</p>
+                            <td><p class="m-0 font-16">Xếp loại chất lượng đảng viên năm {{$nam}} cho {{count($data)}} đảng viên.</p>
                             </td>
                         </tr>
                         <tr>

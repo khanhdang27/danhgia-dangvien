@@ -47,7 +47,7 @@
                         @foreach($data as $key => $item)
                             <tr>
                                 <td>{{ ++$key }}</td>
-                                <td>{{ $item->hoten }}</td>
+                                <td>{{ $item->dangvien != null ? $item->dangvien->hoten : '' }}</td>
                                 <td></td>
                                 <td></td>
                                 <td></td>

@@ -15,15 +15,19 @@ class InController extends Controller {
     }
 
     public function printMau1(Request $request) {
-        $now  = Carbon::now()->year;
-        $data = DangVien::query()->orderBy('hoten')->get();
+        $now = Carbon::now()->year;
+        //        $data = DangVien::query()->orderBy('hoten')->get();
+        $data = Dgdv::query()->where('nam', $now)->where('cbxl', '<>', NULL)->get();
+
         return view("In::mau1", compact('data', 'now'));
     }
 
     public function printMau2(Request $request) {
         $now  = Carbon::now()->year;
         $data = Dgdv::query()->where('nam', $now)->where('duk', 'HTXSNV')->get();
-        return view("In::mau2", compact('data', 'now'));
+        $dvxs = Dgdv::query()->where('nam', $now)->where('duk', 'HTXSNV')->pluck('madv');
+        $dangvien = Dgdv::query()->where('nam', $now)->whereNotIn('madv',$dvxs)->where('cbxl', '<>',NULL)->get();
+        return view("In::mau2", compact('data', 'now','dangvien'));
     }
 
     public function printMau3(Request $request) {

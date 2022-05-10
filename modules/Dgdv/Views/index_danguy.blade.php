@@ -32,6 +32,17 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="form-group">
+                                            <label for="nam">Năm</label>
+                                            <select name="nam" id="nam" class="select2 form-control">
+                                                @foreach($nams as $key => $nam)
+                                                    <option value="{{ $key }}"
+                                                            @if(isset($filter['nam']) && $filter['nam'] == $key) selected @endif>{{ $nam }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
                                             <label for="chibo">Chi bộ</label>
                                             <select name="chibo" id="chibo" class="select2 form-control">
                                                 <option value="">Tất cả</option>
@@ -84,9 +95,9 @@
                                 <tr>
                                     <th rowspan="2" class="align-middle">MSĐV</th>
                                     <th rowspan="2" class="align-middle">Họ tên</th>
-{{--                                    <th colspan="4" class="border-bottom-0 text-center">Tự xếp loại</th>--}}
-{{--                                    <th colspan="4" class="border-bottom-0 text-center">Chính quyền xếp loại</th>--}}
-{{--                                    <th colspan="4" class="border-bottom-0 text-center">Chi uỷ xếp loại</th>--}}
+                                    {{--                                    <th colspan="4" class="border-bottom-0 text-center">Tự xếp loại</th>--}}
+                                    {{--                                    <th colspan="4" class="border-bottom-0 text-center">Chính quyền xếp loại</th>--}}
+                                    {{--                                    <th colspan="4" class="border-bottom-0 text-center">Chi uỷ xếp loại</th>--}}
                                     <th colspan="4" class="border-bottom-0 text-center">Chi bộ xếp loại</th>
                                     <th colspan="4" class="border-bottom-0 text-center">Đảng uỷ khoa xếp loại</th>
                                 </tr>
@@ -106,36 +117,36 @@
                                         <td>{{ $item->madv != null ? str_pad($item->madv,6,0,STR_PAD_LEFT) : '' }}</td>
                                         <td>{{ $item->hoten ?? ''}}</td>
 
-                                      {{--  @foreach($xeploai as $key => $xl)
-                                            <td class="px-0 text-center @if($key === array_key_first($xeploai)) border-left @endif">
-                                                <input style="width: 18px; height: 18px" type="radio"
-                                                       id="{{$item->madv}}txl{{$key}}" name="txl{{$item->madv}}"
-                                                       value="{{$key}}" disabled
-                                                    {{ count($item->dgdv) > 0 ? ($item->dgdv[0]->txl == $key ? 'checked' : '') : ''}}
-                                                ></td>
-                                        @endforeach
+                                        {{--  @foreach($xeploai as $key => $xl)
+                                              <td class="px-0 text-center @if($key === array_key_first($xeploai)) border-left @endif">
+                                                  <input style="width: 18px; height: 18px" type="radio"
+                                                         id="{{$item->madv}}txl{{$key}}" name="txl{{$item->madv}}"
+                                                         value="{{$key}}" disabled
+                                                      {{ count($item->dgdv) > 0 ? ($item->dgdv[0]->txl == $key ? 'checked' : '') : ''}}
+                                                  ></td>
+                                          @endforeach
 
-                                        @foreach($xeploai as $key => $xl)
-                                            <td class="px-0 text-center @if($key === array_key_first($xeploai)) border-left @endif">
-                                                <input style="width: 18px; height: 18px" type="radio"
-                                                       id="{{$item->madv}}cqxl{{$key}}"
-                                                       name="{{$item->madv}}[cqxl]"
-                                                       value="{{$key}}" disabled
-                                                    {{ count($item->dgdv) > 0 ? ($item->dgdv[0]->cqxl == $key ? 'checked' : '') : ''}}
-                                                ></td>
+                                          @foreach($xeploai as $key => $xl)
+                                              <td class="px-0 text-center @if($key === array_key_first($xeploai)) border-left @endif">
+                                                  <input style="width: 18px; height: 18px" type="radio"
+                                                         id="{{$item->madv}}cqxl{{$key}}"
+                                                         name="{{$item->madv}}[cqxl]"
+                                                         value="{{$key}}" disabled
+                                                      {{ count($item->dgdv) > 0 ? ($item->dgdv[0]->cqxl == $key ? 'checked' : '') : ''}}
+                                                  ></td>
 
-                                        @endforeach
+                                          @endforeach
 
-                                        @foreach($xeploai as $key => $xl)
-                                            <td class="px-0 text-center @if($key === array_key_first($xeploai)) border-left @endif">
-                                                <input style="width: 18px; height: 18px" type="radio"
-                                                       id="{{$item->madv}}cuxl{{$key}}"
-                                                       name="{{$item->madv}}[cuxl]"
-                                                       value="{{$key}}" disabled
-                                                    {{ count($item->dgdv) > 0 ? ($item->dgdv[0]->cuxl == $key ? 'checked' : '') : ''}}
-                                                ></td>
+                                          @foreach($xeploai as $key => $xl)
+                                              <td class="px-0 text-center @if($key === array_key_first($xeploai)) border-left @endif">
+                                                  <input style="width: 18px; height: 18px" type="radio"
+                                                         id="{{$item->madv}}cuxl{{$key}}"
+                                                         name="{{$item->madv}}[cuxl]"
+                                                         value="{{$key}}" disabled
+                                                      {{ count($item->dgdv) > 0 ? ($item->dgdv[0]->cuxl == $key ? 'checked' : '') : ''}}
+                                                  ></td>
 
-                                        @endforeach--}}
+                                          @endforeach--}}
 
                                         @foreach($xeploai as $key => $xl)
                                             <td class="px-0 text-center @if($key === array_key_first($xeploai)) border-left @endif">
@@ -153,6 +164,7 @@
                                                        id="{{$item->madv}}duk{{$key}}"
                                                        name="{{$item->madv}}[duk]"
                                                        value="{{$key}}"
+                                                       @if((isset($filter['nam']) && $filter['nam']!=$year)) disabled @endif
                                                     {{ count($item->dgdv) > 0 ? ($item->dgdv[0]->duk != null ? ($item->dgdv[0]->duk == $key ? 'checked' : '') : ($item->dgdv[0]->cbxl == $key ? 'checked' : '')) : ''}}
                                                 >
                                             </td>
@@ -162,7 +174,9 @@
                                 </tbody>
                             </table>
                         </div>
-                        <button type="submit" class="btn btn-info mr-2">Lưu</button>
+                        @if((!isset($filter['nam'])) || (isset($filter['nam']) && $filter['nam']==$year))
+                            <button type="submit" class="btn btn-info mr-2">Lưu</button>
+                        @endif
                     </div>
                 </form>
             </div>
