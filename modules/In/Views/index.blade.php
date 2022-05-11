@@ -72,12 +72,12 @@
                         </a>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <a href="#" class="btn btn-info">
+                        <a href="{{route('get.in.printMau4')}}" class="btn btn-info">
                             Phiếu đánh giá đảng bộ khoa CNTT&TT
                         </a>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <a href="#" class="btn btn-info">
+                        <a href="{{route('get.in.printMau5')}}" class="btn btn-info">
                             Phiếu xin ý kiến - Đánh giá chất lượng và xếp loại (tổ chức Đảng hoặc tập thể lãnh đạo)
                         </a>
                     </div>

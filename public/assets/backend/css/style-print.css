@@ -28,7 +28,7 @@
 }
 
 .float-right {
-    float: right!important;
+    float: right !important;
 }
 
 .m-0 {
@@ -79,6 +79,18 @@
     padding: 0;
 }
 
+.p-2 {
+    padding: 0.5rem;
+}
+
+.p-3 {
+    padding: 1rem;
+}
+
+.p-4 {
+    padding: 1.5rem;
+}
+
 .p-5 {
     padding: 3rem;
 }
@@ -87,10 +99,42 @@
     padding: 0 3rem;
 }
 
+.py-2 {
+    padding: 0.5rem 0;
+}
+
+.py-3 {
+    padding: 1rem 0;
+}
+
+.py-4 {
+    padding: 1.5rem 0;
+}
+
+.py-5 {
+    padding: 3rem 0;
+}
+
+.pt-5 {
+    padding-top: 3rem;
+}
+
+.pb-5 {
+    padding-bottom: 3rem;
+}
+
 .my-5 {
     margin: 3rem 0;
 }
 
 .align-top {
-    vertical-align: top!important;
+    vertical-align: top !important;
+}
+
+.align-middle {
+    vertical-align: middle !important;
+}
+
+.border-dark {
+    border-color: #343a40 !important
 }

@@ -63,7 +63,8 @@
                                     <td>{{ Rating::getXeploai($item->duk)}}</td>
 {{--                                    <td>{{ Rating::getXeploai($item->dut)}}</td>--}}
                                     <td class="link-action">
-                                        @if( (int)$item->nam < $toyear || $item->cqxl != null || $item->cuxl != null || $item->cbxl != null || $item->dtxl != null || $item->dut != null || $item->duk != null)
+                                        @if((int)$item->nam < $toyear)
+                                        @elseif(  $item->cqxl != null || $item->cuxl != null || $item->cbxl != null || $item->dtxl != null || $item->dut != null || $item->duk != null)
                                             <a href="#" class="btn btn-disable btn-primary"><i class="fa fa-pencil"></i></a>
                                             <a href="#" class="btn btn-disable btn-danger"><i class="fa fa-trash"></i></a>
                                         @else
