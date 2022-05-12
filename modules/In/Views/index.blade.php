@@ -33,23 +33,23 @@
                         </a>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <a href="#" class="btn btn-info">
+                        <a href="{{route('get.in.printMau8')}}" class="btn btn-info">
                             Quyết định - Về việc khen thưởng đảng viên
                         </a>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <a href="#" class="btn btn-info">
+                        <a href="{{route('get.in.printMau9')}}" class="btn btn-info">
                             Quyết định - Xếp loại chất lượng các chi bộ trực thuộc
 
                         </a>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <a href="#" class="btn btn-info">
+                        <a href="{{route('get.in.printMau10')}}" class="btn btn-info">
                             Quyết định - Tặng giấy khen cho chi bộ trực thuộc Đảng ủy cơ sở
                         </a>
                     </div>
                     <div class="col-md-6 mb-3">
-                        <a href="#" class="btn btn-info">
+                        <a href="{{route('get.in.printMau11')}}" class="btn btn-info">
                             Danh sách đảng viên chưa kiểm điểm, xếp loại chất lượng
                         </a>
                     </div>

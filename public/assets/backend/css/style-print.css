@@ -115,6 +115,10 @@
     padding: 3rem 0;
 }
 
+.pt-4 {
+    padding-top: 1.5rem;
+}
+
 .pt-5 {
     padding-top: 3rem;
 }
@@ -137,4 +141,12 @@
 
 .border-dark {
     border-color: #343a40 !important
+}
+
+.w-50 {
+    width: 50%;
+}
+
+.nowrap {
+    white-space: nowrap;
 }

@@ -13,6 +13,10 @@ Route::middleware('admin')->group(function () {
             Route::get('/mau5', "InController@printMau5")->name('get.in.printMau5');
             Route::get('/mau6', "InController@printMau6")->name('get.in.printMau6');
             Route::get('/mau7', "InController@printMau7")->name('get.in.printMau7');
+            Route::get('/mau8', "InController@printMau8")->name('get.in.printMau8');
+            Route::get('/mau9', "InController@printMau9")->name('get.in.printMau9');
+            Route::get('/mau10', "InController@printMau10")->name('get.in.printMau10');
+            Route::get('/mau11', "InController@printMau11")->name('get.in.printMau11');
         });
     });
 });
