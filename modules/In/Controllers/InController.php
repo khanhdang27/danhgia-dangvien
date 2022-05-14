@@ -40,7 +40,9 @@ class InController extends Controller {
 
     public function printMau4(Request $request) {
         $now   = Carbon::now()->year;
-        $chibo = ChiBo::all();
+        $chibo = ChiBo::query()->with('dgcb', function ($query) use ($now) {
+            $query->where('nam', $now);
+        })->get();
         return view("In::mau4", compact('now', 'chibo'));
     }
 
@@ -49,7 +51,9 @@ class InController extends Controller {
         $ngay   = str_pad($carbon->day, 2, 0, 0);
         $thang  = str_pad($carbon->month, 2, 0, 0);
         $nam    = $carbon->year;
-        $chibo  = ChiBo::all();
+        $chibo  = ChiBo::query()->with('dgcb', function ($query) use ($nam) {
+            $query->where('nam', $nam);
+        })->get();
         return view("In::mau5", compact('ngay', 'thang', 'nam', 'chibo'));
     }
 
@@ -79,7 +83,7 @@ class InController extends Controller {
         $ngay   = str_pad($carbon->day, 2, 0, 0);
         $thang  = str_pad($carbon->month, 2, 0, 0);
         $nam    = $carbon->year;
-        $data   = Dgdv::query()->where('nam', $nam)->where('duk', 'HTXSNV')->get()->sortBy(function ($query){
+        $data   = Dgdv::query()->where('nam', $nam)->where('duk', 'HTXSNV')->get()->sortBy(function ($query) {
             return $query->dangvien->chibo->tencb;
         });
         return view("In::mau8", compact('ngay', 'thang', 'nam', 'data'));
@@ -90,7 +94,7 @@ class InController extends Controller {
         $ngay   = str_pad($carbon->day, 2, 0, 0);
         $thang  = str_pad($carbon->month, 2, 0, 0);
         $nam    = $carbon->year;
-        $data   = Dgcb::query()->where('nam', $nam)->where('duk', '<>',NULL)->orderBy('macb')->get();
+        $data   = Dgcb::query()->where('nam', $nam)->where('duk', '<>', NULL)->orderBy('macb')->get();
         return view("In::mau9", compact('ngay', 'thang', 'nam', 'data'));
     }
 
@@ -104,8 +108,8 @@ class InController extends Controller {
     }
 
     public function printMau11(Request $request) {
-        $nam    = Carbon::now()->year;
-        $data   = ChuaDg::query()->where('nam', $nam)->orderBy('madv')->get();
+        $nam  = Carbon::now()->year;
+        $data = ChuaDg::query()->where('nam', $nam)->orderBy('madv')->get();
         return view("In::mau11", compact('nam', 'data'));
     }
 }

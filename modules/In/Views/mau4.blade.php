@@ -47,7 +47,7 @@
                             <tr>
                                 <td class="text-center">{{++$key}}</td>
                                 <td>{{$cb->tencb}}</td>
-                                <td></td>
+                                <td>{{$cb->dgcb != '[]' ? $cb->dgcb[0]->txl : ''}}</td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
