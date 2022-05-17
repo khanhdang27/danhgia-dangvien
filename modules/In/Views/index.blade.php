@@ -17,8 +17,8 @@
         </div>
         <div class="card">
             <div class="card-header">
-                <button id="btn-maudon" class="btn btn-primary font-18 active" style="width: 150px">Mẫu đơn</button>
-                <button id="btn-mauphieu" class="btn btn-primary font-18" style="width: 150px">Mẫu phiếu</button>
+                <button id="btn-maudon" class="btn btn-primary font-18 active" style="width: 150px">Kết xuất quyết định</button>
+                <button id="btn-mauphieu" class="btn btn-primary font-18" style="width: 150px">Kết xuất mẫu phiếu</button>
             </div>
             <div class="card-body">
                 <div id="maudon" class="row font-20">
